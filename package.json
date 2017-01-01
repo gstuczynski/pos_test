@@ -1,0 +1,21 @@
+{
+  "name": "pos-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0",
+    "mongoose": "^4.7.5",
+    "node-rest-client": "^2.0.1",
+    "node-stringify": "0.0.19",
+    "node-xml-lite": "0.0.7",
+    "soap": "^0.18.0",
+    "stringfy": "0.0.12",
+    "xml2js": "^0.4.17"
+  }
+}
