@@ -51,24 +51,33 @@ app.use(express.static(path.join(__dirname,'client')));
 //    DOCELOWO ODBYWAĆ SIĘ TO MA CYKLICZNIE I USTAWIANE BĘDĄ PARAMETRY
 var args = {
     data: {
-        "from": "2016-07-03T14:23:01",
-          "to": "2017-05-03T14:23:01"
+  "from": "2015-05-03T14:23:01",
+  "to": "2017-05-03T14:23:01",
+  "warehouseIdList": [
+    {
+      "idWarehouse": 100000
+    }
+  ]
     },
     headers: { "Content-Type": "application/json" }
 };
 var options_auth = { user: "stream_grst", password: "123" };
 var client = new Client(options_auth);
 var x ={};
-client.post("http://77.252.243.23:7070/next-app/services/rest/cmm/articles/findModified", args, function (require, response) {
+client.post("http://77.252.243.23:7070/next-app/services/rest/whm/articlesStocks/findModified", args, function (require, response) {
 x = require.toString('ascii');
 
 parseString(x, function (err, result) {
- allAboutArticle = result.ArticlesWebServiceFindModifiedResponse.articleDataList;
+
+
+ allAboutArticle = result.ArticlesStocksWebServiceFindModifiedResponse.articleStockDataList;
+//console.log(allAboutArticle[0].nonReservedAvaliableStock)
 
 for(var i=0;i<100;i++){
     var article = new Model({
         id :allAboutArticle[i].articleId[0].idArticle[0],
-       index :allAboutArticle[i].articleId[0].index[0]
+       index :allAboutArticle[i].articleId[0].index[0],
+       avaliableStock : Number(allAboutArticle[i].nonReservedAvaliableStock)
   });
    article.save(function(err, resource){
     if(err){
