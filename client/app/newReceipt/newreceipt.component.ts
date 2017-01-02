@@ -14,6 +14,7 @@ export class NewReceiptComponent  {
 articles: Array<any> = [];
 
 positions: Array<any> = [];
+idSaleOrder: number;
 
 
 
@@ -27,9 +28,24 @@ addToReceipt(article:any){
     this.positions.push(article);
 }
 sendOrder(){
-this.articlesService.sendOrder();
-}
+this.articlesService.sendOrder().subscribe(res => {
+    
+      this.idSaleOrder = Number(res);
+      this.sendOrderItem()
+      //this.sendOrderItem();
+});
+
+
+
+
 
 
 }
 
+
+sendOrderItem(){
+this.articlesService.sendOrderItem()
+}
+
+
+}

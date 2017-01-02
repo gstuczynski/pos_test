@@ -21,16 +21,32 @@ constructor(private http: Http){}
 
 sendOrder(){
 
+  interface orderDataItem{
+  "orderItemAddData": {
+    "idOrder": 118400,
+    "articleId": {
+      "idArticle": 115200
+    },
+    "quantity": "5",
+    "priceBeforeAllowance": "5"
+   }
+    }
+
+  //najperw tworze zamówienie - w odpowiedzi dostaję id
   return this.http.request('/api/sendOrder')
-    .subscribe(res => {
-      console.log(res);
+    .map(res => {
+    res = res["_body"];
     })
-    
 
-   
+    }
+
+sendOrderItem(){
+  console.log("sendOrderItem")
+    return this.http.request('/api/sendOrderItems')
+    .map(res => {
+    res = res["_body"];
+    })
 }
-
-
 
 
 }

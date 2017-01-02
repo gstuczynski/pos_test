@@ -1,0 +1,4 @@
+{
+    "host": "http://77.252.243.23:7070",
+    "localdb": "mongodb://localhost/articles"
+}

@@ -1,5 +1,10 @@
 const PORT = 3000 || process.env.PORT;
-const DB = "mongodb://localhost/articles";
+//const DB = "mongodb://localhost/articles";
+
+const conf = require("./conf");
+const DB = conf.localdb;
+var host = conf.host;
+ host = host + "/next-app/services/rest";
 
 var express = require('express')
 
@@ -64,7 +69,12 @@ var args = {
 var options_auth = { user: "stream_grst", password: "123" };
 var client = new Client(options_auth);
 var x ={};
-client.post("http://77.252.243.23:7070/next-app/services/rest/whm/articlesStocks/findModified", args, function (require, response) {
+
+var articlesFindModifiedService = host + "/whm/articlesStocks/findModified";
+
+
+
+client.post(articlesFindModifiedService, args, function (require, response) {
 x = require.toString('ascii');
 
 parseString(x, function (err, result) {
